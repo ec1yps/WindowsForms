@@ -43,7 +43,8 @@ namespace Clock
 		{
 			cbShowDate.Visible = true;
 			btnHideControls.Visible = true;
-			this.TransparencyKey = Color.Gray;
+			this.TransparencyKey = Color.Empty;
+			labelTime.BackColor = Color.Empty;
 			this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
 			this.ShowInTaskbar = true;
 		}
