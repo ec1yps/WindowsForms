@@ -71,7 +71,15 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Fonts\HirosakiRegular-BWlg5.ttf" />
+    <None Include="Fonts\Lexa.otf" />
+    <Content Include="Fonts\LTRailway-Regular.otf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Fonts\Nebula-Regular.ttf" />
+    <None Include="Fonts\Terminat.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
