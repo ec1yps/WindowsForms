@@ -20,6 +20,7 @@ namespace Clock
 		{
 			InitializeComponent();
 			this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - this.Width, 50);
+			SetVisibility(false);
 
 			//InitCustomLabelFont(Properties.Resources.LTRailway_Regular);
 			labelTime.BackColor = Color.AliceBlue;
@@ -65,12 +66,13 @@ namespace Clock
 
 		private void btnHideControls_Click(object sender, EventArgs e)
 		{
-			SetVisibility(false);
+			SetVisibility(cmShowControls.Checked = false);
 		}
 
 		private void labelTime_DoubleClick(object sender, EventArgs e)
 		{
-			SetVisibility(true);
+			//SetVisibility(true);
+			cmShowControls.Checked = true;
 		}
 
 		private void cmExit_Click(object sender, EventArgs e)
@@ -111,28 +113,42 @@ namespace Clock
 				this.TopMost = false;
 			}
 		}
-
-		private void cmBackColor_Click(object sender, EventArgs e)
+		
+		private void SetColor(object sender, EventArgs e)
 		{
-			colorDialog.Color = labelTime.BackColor;
-			if (colorDialog.ShowDialog() == DialogResult.OK)
-				labelTime.BackColor = colorDialog.Color;
+			ColorDialog dialog = new ColorDialog();
+
+			switch ((sender as ToolStripMenuItem).Text)
+			{
+				case "Background color": dialog.Color = labelTime.BackColor; break;
+				case "Foreground color": dialog.Color = labelTime.ForeColor; break;
+			}
+
+			if (dialog.ShowDialog() == DialogResult.OK)
+			{
+				switch ((sender as ToolStripMenuItem).Text)
+				{
+					case "Background color": labelTime.BackColor = dialog.Color; break;
+					case "Foreground color": labelTime.ForeColor = dialog.Color; break;
+				}
+			}
+				labelTime.ForeColor = dialog.Color;
 		}
 
-		private void cmForeColor_Click(object sender, EventArgs e)
+		private void cmShowControls_CheckedChanged(object sender, EventArgs e)
 		{
-			colorDialog.Color = labelTime.ForeColor;
-			if (colorDialog.ShowDialog() == DialogResult.OK)
-				labelTime.ForeColor = colorDialog.Color;
+			SetVisibility(cmShowControls.Checked);
 		}
 
-		private void cmLTRailway_Click(object sender, EventArgs e)
+		private void cmLTRailway_CheckedChanged(object sender, EventArgs e)
 		{
-			InitCustomLabelFont(Properties.Resources.LTRailway_Regular); 
+			cmAlarmClock.Checked = false;
+			InitCustomLabelFont(Properties.Resources.LTRailway_Regular);
 		}
 
-		private void cmAlarmClock_Click(object sender, EventArgs e)
+		private void cmAlarmClock_CheckedChanged(object sender, EventArgs e)
 		{
+			cmLTRailway.Checked = false;
 			InitCustomLabelFont(Properties.Resources.alarm_clock);
 		}
 	}

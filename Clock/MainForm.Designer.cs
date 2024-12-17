@@ -33,6 +33,7 @@
 			this.labelTime = new System.Windows.Forms.Label();
 			this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.cmTopmost = new System.Windows.Forms.ToolStripMenuItem();
+			this.cmShowControls = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.cmShowDate = new System.Windows.Forms.ToolStripMenuItem();
 			this.cmShoeWeekday = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,6 +42,10 @@
 			this.cmBackColor = new System.Windows.Forms.ToolStripMenuItem();
 			this.cmForeColor = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.cmFonts = new System.Windows.Forms.ToolStripMenuItem();
+			this.cmLTRailway = new System.Windows.Forms.ToolStripMenuItem();
+			this.cmAlarmClock = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.cmExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.timer = new System.Windows.Forms.Timer(this.components);
 			this.cbShowDate = new System.Windows.Forms.CheckBox();
@@ -48,10 +53,6 @@
 			this.cbShowWeekDay = new System.Windows.Forms.CheckBox();
 			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
-			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-			this.cmFonts = new System.Windows.Forms.ToolStripMenuItem();
-			this.cmAlarmClock = new System.Windows.Forms.ToolStripMenuItem();
-			this.cmLTRailway = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -73,6 +74,7 @@
 			// 
 			this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmTopmost,
+            this.cmShowControls,
             this.toolStripSeparator1,
             this.cmShowDate,
             this.cmShoeWeekday,
@@ -83,7 +85,7 @@
             this.toolStripSeparator4,
             this.cmExit});
 			this.contextMenu.Name = "contextMenu";
-			this.contextMenu.Size = new System.Drawing.Size(181, 182);
+			this.contextMenu.Size = new System.Drawing.Size(181, 204);
 			// 
 			// cmTopmost
 			// 
@@ -92,6 +94,14 @@
 			this.cmTopmost.Size = new System.Drawing.Size(180, 22);
 			this.cmTopmost.Text = "Topmost";
 			this.cmTopmost.CheckedChanged += new System.EventHandler(this.cmTopmost_CheckedChanged);
+			// 
+			// cmShowControls
+			// 
+			this.cmShowControls.CheckOnClick = true;
+			this.cmShowControls.Name = "cmShowControls";
+			this.cmShowControls.Size = new System.Drawing.Size(180, 22);
+			this.cmShowControls.Text = "Show controls";
+			this.cmShowControls.CheckedChanged += new System.EventHandler(this.cmShowControls_CheckedChanged);
 			// 
 			// toolStripSeparator1
 			// 
@@ -131,21 +141,51 @@
 			// cmBackColor
 			// 
 			this.cmBackColor.Name = "cmBackColor";
-			this.cmBackColor.Size = new System.Drawing.Size(180, 22);
+			this.cmBackColor.Size = new System.Drawing.Size(168, 22);
 			this.cmBackColor.Text = "Background color";
-			this.cmBackColor.Click += new System.EventHandler(this.cmBackColor_Click);
+			this.cmBackColor.Click += new System.EventHandler(this.SetColor);
 			// 
 			// cmForeColor
 			// 
 			this.cmForeColor.Name = "cmForeColor";
 			this.cmForeColor.Size = new System.Drawing.Size(168, 22);
 			this.cmForeColor.Text = "Foregraund color";
-			this.cmForeColor.Click += new System.EventHandler(this.cmForeColor_Click);
+			this.cmForeColor.Click += new System.EventHandler(this.SetColor);
 			// 
 			// toolStripSeparator3
 			// 
 			this.toolStripSeparator3.Name = "toolStripSeparator3";
 			this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+			// 
+			// cmFonts
+			// 
+			this.cmFonts.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmLTRailway,
+            this.cmAlarmClock});
+			this.cmFonts.Name = "cmFonts";
+			this.cmFonts.Size = new System.Drawing.Size(180, 22);
+			this.cmFonts.Text = "Fonts";
+			// 
+			// cmLTRailway
+			// 
+			this.cmLTRailway.CheckOnClick = true;
+			this.cmLTRailway.Name = "cmLTRailway";
+			this.cmLTRailway.Size = new System.Drawing.Size(180, 22);
+			this.cmLTRailway.Text = "LTRailway_Regular";
+			this.cmLTRailway.CheckedChanged += new System.EventHandler(this.cmLTRailway_CheckedChanged);
+			// 
+			// cmAlarmClock
+			// 
+			this.cmAlarmClock.CheckOnClick = true;
+			this.cmAlarmClock.Name = "cmAlarmClock";
+			this.cmAlarmClock.Size = new System.Drawing.Size(180, 22);
+			this.cmAlarmClock.Text = "alarm_clock";
+			this.cmAlarmClock.CheckedChanged += new System.EventHandler(this.cmAlarmClock_CheckedChanged);
+			// 
+			// toolStripSeparator4
+			// 
+			this.toolStripSeparator4.Name = "toolStripSeparator4";
+			this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
 			// 
 			// cmExit
 			// 
@@ -206,34 +246,6 @@
 			// 
 			this.colorDialog.FullOpen = true;
 			// 
-			// toolStripSeparator4
-			// 
-			this.toolStripSeparator4.Name = "toolStripSeparator4";
-			this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
-			// 
-			// cmFonts
-			// 
-			this.cmFonts.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmLTRailway,
-            this.cmAlarmClock});
-			this.cmFonts.Name = "cmFonts";
-			this.cmFonts.Size = new System.Drawing.Size(180, 22);
-			this.cmFonts.Text = "Fonts";
-			// 
-			// cmAlarmClock
-			// 
-			this.cmAlarmClock.Name = "cmAlarmClock";
-			this.cmAlarmClock.Size = new System.Drawing.Size(180, 22);
-			this.cmAlarmClock.Text = "alarm_clock";
-			this.cmAlarmClock.Click += new System.EventHandler(this.cmAlarmClock_Click);
-			// 
-			// cmLTRailway
-			// 
-			this.cmLTRailway.Name = "cmLTRailway";
-			this.cmLTRailway.Size = new System.Drawing.Size(180, 22);
-			this.cmLTRailway.Text = "LTRailway_Regular";
-			this.cmLTRailway.Click += new System.EventHandler(this.cmLTRailway_Click);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,6 +290,7 @@
 		private System.Windows.Forms.ToolStripMenuItem cmFonts;
 		private System.Windows.Forms.ToolStripMenuItem cmLTRailway;
 		private System.Windows.Forms.ToolStripMenuItem cmAlarmClock;
+		private System.Windows.Forms.ToolStripMenuItem cmShowControls;
 	}
 }
 
