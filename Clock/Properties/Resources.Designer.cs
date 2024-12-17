@@ -63,6 +63,16 @@ namespace Clock.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] alarm_clock {
+            get {
+                object obj = ResourceManager.GetObject("alarm_clock", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] LTRailway_Regular {
             get {
                 object obj = ResourceManager.GetObject("LTRailway_Regular", resourceCulture);

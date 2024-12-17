@@ -48,6 +48,10 @@
 			this.cbShowWeekDay = new System.Windows.Forms.CheckBox();
 			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
+			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+			this.cmFonts = new System.Windows.Forms.ToolStripMenuItem();
+			this.cmAlarmClock = new System.Windows.Forms.ToolStripMenuItem();
+			this.cmLTRailway = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -75,9 +79,11 @@
             this.toolStripSeparator2,
             this.cmColors,
             this.toolStripSeparator3,
+            this.cmFonts,
+            this.toolStripSeparator4,
             this.cmExit});
 			this.contextMenu.Name = "contextMenu";
-			this.contextMenu.Size = new System.Drawing.Size(150, 132);
+			this.contextMenu.Size = new System.Drawing.Size(181, 182);
 			// 
 			// cmTopmost
 			// 
@@ -200,6 +206,34 @@
 			// 
 			this.colorDialog.FullOpen = true;
 			// 
+			// toolStripSeparator4
+			// 
+			this.toolStripSeparator4.Name = "toolStripSeparator4";
+			this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+			// 
+			// cmFonts
+			// 
+			this.cmFonts.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmLTRailway,
+            this.cmAlarmClock});
+			this.cmFonts.Name = "cmFonts";
+			this.cmFonts.Size = new System.Drawing.Size(180, 22);
+			this.cmFonts.Text = "Fonts";
+			// 
+			// cmAlarmClock
+			// 
+			this.cmAlarmClock.Name = "cmAlarmClock";
+			this.cmAlarmClock.Size = new System.Drawing.Size(180, 22);
+			this.cmAlarmClock.Text = "alarm_clock";
+			this.cmAlarmClock.Click += new System.EventHandler(this.cmAlarmClock_Click);
+			// 
+			// cmLTRailway
+			// 
+			this.cmLTRailway.Name = "cmLTRailway";
+			this.cmLTRailway.Size = new System.Drawing.Size(180, 22);
+			this.cmLTRailway.Text = "LTRailway_Regular";
+			this.cmLTRailway.Click += new System.EventHandler(this.cmLTRailway_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -240,6 +274,10 @@
 		private System.Windows.Forms.ToolStripMenuItem cmForeColor;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ColorDialog colorDialog;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+		private System.Windows.Forms.ToolStripMenuItem cmFonts;
+		private System.Windows.Forms.ToolStripMenuItem cmLTRailway;
+		private System.Windows.Forms.ToolStripMenuItem cmAlarmClock;
 	}
 }
 

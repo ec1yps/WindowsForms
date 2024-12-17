@@ -21,16 +21,15 @@ namespace Clock
 			InitializeComponent();
 			this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - this.Width, 50);
 
-			InitCustomLabelFont();
+			//InitCustomLabelFont(Properties.Resources.LTRailway_Regular);
 			labelTime.BackColor = Color.AliceBlue;
 		}
 
-		void InitCustomLabelFont()
+		void InitCustomLabelFont(byte[] fontData)
 		{
-			byte[] fontData = Properties.Resources.LTRailway_Regular;
 			IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
 			System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
-			pfc.AddMemoryFont(fontPtr, Properties.Resources.LTRailway_Regular.Length);
+			pfc.AddMemoryFont(fontPtr, fontData.Length);
 			System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
 
 			labelTime.Font = new Font(pfc.Families[0], labelTime.Font.Size, FontStyle.Bold);
@@ -125,6 +124,16 @@ namespace Clock
 			colorDialog.Color = labelTime.ForeColor;
 			if (colorDialog.ShowDialog() == DialogResult.OK)
 				labelTime.ForeColor = colorDialog.Color;
+		}
+
+		private void cmLTRailway_Click(object sender, EventArgs e)
+		{
+			InitCustomLabelFont(Properties.Resources.LTRailway_Regular); 
+		}
+
+		private void cmAlarmClock_Click(object sender, EventArgs e)
+		{
+			InitCustomLabelFont(Properties.Resources.alarm_clock);
 		}
 	}
 }

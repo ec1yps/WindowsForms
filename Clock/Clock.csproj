@@ -73,6 +73,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Fonts\alarm clock.ttf" />
     <None Include="Fonts\HirosakiRegular-BWlg5.ttf" />
     <None Include="Fonts\Lexa.otf" />
     <Content Include="Fonts\LTRailway-Regular.otf">
