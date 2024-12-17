@@ -138,7 +138,7 @@
 			// cmForeColor
 			// 
 			this.cmForeColor.Name = "cmForeColor";
-			this.cmForeColor.Size = new System.Drawing.Size(180, 22);
+			this.cmForeColor.Size = new System.Drawing.Size(168, 22);
 			this.cmForeColor.Text = "Foregraund color";
 			this.cmForeColor.Click += new System.EventHandler(this.cmForeColor_Click);
 			// 
