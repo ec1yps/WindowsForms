@@ -12,9 +12,10 @@ namespace Clock
 {
 	public partial class ChooseFontForm : Form
 	{
-		public ChooseFontForm()
+		public ChooseFontForm(MainForm mainForm)
 		{
 			InitializeComponent();
+			cbFonts.Items.Clear();
 		}
 	}
 }

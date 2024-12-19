@@ -43,8 +43,6 @@
 			this.cmForeColor = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.cmFonts = new System.Windows.Forms.ToolStripMenuItem();
-			this.cmLTRailway = new System.Windows.Forms.ToolStripMenuItem();
-			this.cmAlarmClock = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.cmExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.timer = new System.Windows.Forms.Timer(this.components);
@@ -159,28 +157,10 @@
 			// 
 			// cmFonts
 			// 
-			this.cmFonts.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmLTRailway,
-            this.cmAlarmClock});
 			this.cmFonts.Name = "cmFonts";
 			this.cmFonts.Size = new System.Drawing.Size(180, 22);
-			this.cmFonts.Text = "Fonts";
-			// 
-			// cmLTRailway
-			// 
-			this.cmLTRailway.CheckOnClick = true;
-			this.cmLTRailway.Name = "cmLTRailway";
-			this.cmLTRailway.Size = new System.Drawing.Size(180, 22);
-			this.cmLTRailway.Text = "LTRailway_Regular";
-			this.cmLTRailway.CheckedChanged += new System.EventHandler(this.cmLTRailway_CheckedChanged);
-			// 
-			// cmAlarmClock
-			// 
-			this.cmAlarmClock.CheckOnClick = true;
-			this.cmAlarmClock.Name = "cmAlarmClock";
-			this.cmAlarmClock.Size = new System.Drawing.Size(180, 22);
-			this.cmAlarmClock.Text = "alarm_clock";
-			this.cmAlarmClock.CheckedChanged += new System.EventHandler(this.cmAlarmClock_CheckedChanged);
+			this.cmFonts.Text = "Choose font";
+			this.cmFonts.Click += new System.EventHandler(this.cmFonts_Click);
 			// 
 			// toolStripSeparator4
 			// 
@@ -288,8 +268,6 @@
 		private System.Windows.Forms.ColorDialog colorDialog;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripMenuItem cmFonts;
-		private System.Windows.Forms.ToolStripMenuItem cmLTRailway;
-		private System.Windows.Forms.ToolStripMenuItem cmAlarmClock;
 		private System.Windows.Forms.ToolStripMenuItem cmShowControls;
 	}
 }

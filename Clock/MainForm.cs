@@ -113,7 +113,7 @@ namespace Clock
 				this.TopMost = false;
 			}
 		}
-		
+
 		private void SetColor(object sender, EventArgs e)
 		{
 			ColorDialog dialog = new ColorDialog();
@@ -132,7 +132,7 @@ namespace Clock
 					case "Foreground color": labelTime.ForeColor = dialog.Color; break;
 				}
 			}
-				labelTime.ForeColor = dialog.Color;
+			labelTime.ForeColor = dialog.Color;
 		}
 
 		private void cmShowControls_CheckedChanged(object sender, EventArgs e)
@@ -140,16 +140,12 @@ namespace Clock
 			SetVisibility(cmShowControls.Checked);
 		}
 
-		private void cmLTRailway_CheckedChanged(object sender, EventArgs e)
+		private void cmFonts_Click(object sender, EventArgs e)
 		{
-			cmAlarmClock.Checked = false;
-			InitCustomLabelFont(Properties.Resources.LTRailway_Regular);
-		}
+			ChooseFontForm chooseFontForm = new ChooseFontForm(this);
 
-		private void cmAlarmClock_CheckedChanged(object sender, EventArgs e)
-		{
-			cmLTRailway.Checked = false;
-			InitCustomLabelFont(Properties.Resources.alarm_clock);
+			if(chooseFontForm.ShowDialog() == DialogResult.OK)
+				labelTime.Font = chooseFontForm.Font;
 		}
 	}
 }

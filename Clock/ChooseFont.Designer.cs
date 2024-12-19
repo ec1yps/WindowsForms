@@ -122,6 +122,7 @@
 			this.Controls.Add(this.cbFonts);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "ChooseFontForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "ChooseFont";
 			((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).EndInit();
 			this.ResumeLayout(false);
