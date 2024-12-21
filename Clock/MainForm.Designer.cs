@@ -36,7 +36,7 @@
 			this.cmShowControls = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.cmShowDate = new System.Windows.Forms.ToolStripMenuItem();
-			this.cmShoeWeekday = new System.Windows.Forms.ToolStripMenuItem();
+			this.cmShowWeekday = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.cmColors = new System.Windows.Forms.ToolStripMenuItem();
 			this.cmBackColor = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +51,7 @@
 			this.cbShowWeekDay = new System.Windows.Forms.CheckBox();
 			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
+			this.cmShowConsole = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -75,7 +76,8 @@
             this.cmShowControls,
             this.toolStripSeparator1,
             this.cmShowDate,
-            this.cmShoeWeekday,
+            this.cmShowWeekday,
+            this.cmShowConsole,
             this.toolStripSeparator2,
             this.cmColors,
             this.toolStripSeparator3,
@@ -83,7 +85,7 @@
             this.toolStripSeparator4,
             this.cmExit});
 			this.contextMenu.Name = "contextMenu";
-			this.contextMenu.Size = new System.Drawing.Size(181, 204);
+			this.contextMenu.Size = new System.Drawing.Size(181, 226);
 			// 
 			// cmTopmost
 			// 
@@ -114,13 +116,13 @@
 			this.cmShowDate.Text = "Show date";
 			this.cmShowDate.CheckedChanged += new System.EventHandler(this.cmShowDate_CheckedChanged);
 			// 
-			// cmShoeWeekday
+			// cmShowWeekday
 			// 
-			this.cmShoeWeekday.CheckOnClick = true;
-			this.cmShoeWeekday.Name = "cmShoeWeekday";
-			this.cmShoeWeekday.Size = new System.Drawing.Size(180, 22);
-			this.cmShoeWeekday.Text = "Shoe weekday";
-			this.cmShoeWeekday.CheckedChanged += new System.EventHandler(this.cmShoeWeekday_CheckedChanged);
+			this.cmShowWeekday.CheckOnClick = true;
+			this.cmShowWeekday.Name = "cmShowWeekday";
+			this.cmShowWeekday.Size = new System.Drawing.Size(180, 22);
+			this.cmShowWeekday.Text = "Shoe weekday";
+			this.cmShowWeekday.CheckedChanged += new System.EventHandler(this.cmShowWeekDay_CheckedChanged);
 			// 
 			// toolStripSeparator2
 			// 
@@ -160,7 +162,7 @@
 			this.cmFonts.Name = "cmFonts";
 			this.cmFonts.Size = new System.Drawing.Size(180, 22);
 			this.cmFonts.Text = "Choose font";
-			this.cmFonts.Click += new System.EventHandler(this.cmFonts_Click);
+			this.cmFonts.Click += new System.EventHandler(this.cmChooseFont_Click);
 			// 
 			// toolStripSeparator4
 			// 
@@ -226,6 +228,14 @@
 			// 
 			this.colorDialog.FullOpen = true;
 			// 
+			// cmShowConsole
+			// 
+			this.cmShowConsole.CheckOnClick = true;
+			this.cmShowConsole.Name = "cmShowConsole";
+			this.cmShowConsole.Size = new System.Drawing.Size(180, 22);
+			this.cmShowConsole.Text = "Show console";
+			this.cmShowConsole.CheckedChanged += new System.EventHandler(this.cmShowConsole_CheckedChanged);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -258,7 +268,7 @@
 		private System.Windows.Forms.ToolStripMenuItem cmTopmost;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem cmShowDate;
-		private System.Windows.Forms.ToolStripMenuItem cmShoeWeekday;
+		private System.Windows.Forms.ToolStripMenuItem cmShowWeekday;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem cmExit;
 		private System.Windows.Forms.ToolStripMenuItem cmColors;
@@ -269,6 +279,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripMenuItem cmFonts;
 		private System.Windows.Forms.ToolStripMenuItem cmShowControls;
+		private System.Windows.Forms.ToolStripMenuItem cmShowConsole;
 	}
 }
 

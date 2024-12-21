@@ -15,27 +15,19 @@ namespace Clock
 {
 	public partial class MainForm : Form
 	{
-		readonly PrivateFontCollection pfc = new PrivateFontCollection();
+		ChooseFontForm fontDialog = null;
 		public MainForm()
 		{
 			InitializeComponent();
+			labelTime.BackColor = Color.Black;
+			labelTime.ForeColor = Color.LimeGreen;
+
 			this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - this.Width, 50);
 			SetVisibility(false);
 
-			//InitCustomLabelFont(Properties.Resources.LTRailway_Regular);
-			labelTime.BackColor = Color.AliceBlue;
+			cmShowConsole.Checked = true;
+			fontDialog = new ChooseFontForm();
 		}
-
-		void InitCustomLabelFont(byte[] fontData)
-		{
-			IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
-			System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
-			pfc.AddMemoryFont(fontPtr, fontData.Length);
-			System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
-
-			labelTime.Font = new Font(pfc.Families[0], labelTime.Font.Size, FontStyle.Bold);
-		}
-
 		void SetVisibility(bool visible)
 		{
 			cbShowDate.Visible = visible;
@@ -48,8 +40,11 @@ namespace Clock
 
 		private void timer_Tick(object sender, EventArgs e)
 		{
-			labelTime.Text = DateTime.Now.ToString("hh:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture);
-
+			labelTime.Text = DateTime.Now.ToString
+				(
+					"hh:mm:ss tt",
+					System.Globalization.CultureInfo.InvariantCulture
+				);
 			if (cbShowDate.Checked)
 			{
 				labelTime.Text += "\n";
@@ -60,7 +55,6 @@ namespace Clock
 				labelTime.Text += "\n";
 				labelTime.Text += DateTime.Now.DayOfWeek;
 			}
-
 			notifyIcon.Text = labelTime.Text;
 		}
 
@@ -71,8 +65,7 @@ namespace Clock
 
 		private void labelTime_DoubleClick(object sender, EventArgs e)
 		{
-			//SetVisibility(true);
-			cmShowControls.Checked = true;
+			SetVisibility(cmShowControls.Checked = true);
 		}
 
 		private void cmExit_Click(object sender, EventArgs e)
@@ -95,14 +88,14 @@ namespace Clock
 			cmShowDate.Checked = cbShowDate.Checked;
 		}
 
-		private void cmShoeWeekday_CheckedChanged(object sender, EventArgs e)
+		private void cmShowWeekDay_CheckedChanged(object sender, EventArgs e)
 		{
-			cbShowWeekDay.Checked = cmShoeWeekday.Checked;
+			cbShowWeekDay.Checked = cmShowWeekday.Checked;
 		}
 
 		private void cbShowWeekDay_CheckedChanged(object sender, EventArgs e)
 		{
-			cmShoeWeekday.Checked = cbShowWeekDay.Checked;
+			cmShowWeekday.Checked = cbShowWeekDay.Checked;
 		}
 
 		private void notifyIcon_DoubleClick(object sender, EventArgs e)
@@ -114,16 +107,19 @@ namespace Clock
 			}
 		}
 
+		private void cmShowControls_CheckedChanged(object sender, EventArgs e)
+		{
+			SetVisibility(cmShowControls.Checked);
+		}
+
 		private void SetColor(object sender, EventArgs e)
 		{
 			ColorDialog dialog = new ColorDialog();
-
-			switch ((sender as ToolStripMenuItem).Text)
+			switch (((ToolStripMenuItem)sender).Text)
 			{
 				case "Background color": dialog.Color = labelTime.BackColor; break;
 				case "Foreground color": dialog.Color = labelTime.ForeColor; break;
 			}
-
 			if (dialog.ShowDialog() == DialogResult.OK)
 			{
 				switch ((sender as ToolStripMenuItem).Text)
@@ -132,20 +128,24 @@ namespace Clock
 					case "Foreground color": labelTime.ForeColor = dialog.Color; break;
 				}
 			}
-			labelTime.ForeColor = dialog.Color;
 		}
 
-		private void cmShowControls_CheckedChanged(object sender, EventArgs e)
+		private void cmChooseFont_Click(object sender, EventArgs e)
 		{
-			SetVisibility(cmShowControls.Checked);
+			if (fontDialog.ShowDialog() == DialogResult.OK)
+				labelTime.Font = fontDialog.Font;
 		}
 
-		private void cmFonts_Click(object sender, EventArgs e)
+		private void cmShowConsole_CheckedChanged(object sender, EventArgs e)
 		{
-			ChooseFontForm chooseFontForm = new ChooseFontForm(this);
-
-			if(chooseFontForm.ShowDialog() == DialogResult.OK)
-				labelTime.Font = chooseFontForm.Font;
+			if ((sender as ToolStripMenuItem).Checked)
+				AllocConsole();
+			else
+				FreeConsole();
 		}
+		[DllImport("kernel32.dll")]
+		public static extern bool AllocConsole();
+		[DllImport("kernel32.dll")]
+		public static extern bool FreeConsole();
 	}
 }
