@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace Clock
 {
@@ -50,6 +51,7 @@ namespace Clock
 			sw.WriteLine($"{cmShowConsole.Checked}");
 			sw.WriteLine($"{labelTime.BackColor.ToArgb()}");
 			sw.WriteLine($"{labelTime.ForeColor.ToArgb()}");
+			sw.WriteLine($"{cmLoadOnWinStartup.Checked}");
 			sw.WriteLine($"{fontDialog.Filename}");
 			sw.WriteLine($"{labelTime.Font.Size}");
 			sw.Close();
@@ -58,7 +60,8 @@ namespace Clock
 
 		void LoadSettings()
 		{
-			Directory.SetCurrentDirectory("..\\..\\Fonts");
+			string execution_path = Path.GetDirectoryName(Application.ExecutablePath);
+			Directory.SetCurrentDirectory($"{execution_path}\\..\\..\\Fonts");
 			StreamReader sr = new StreamReader("Settings.ini");
 			cmTopmost.Checked = bool.Parse(sr.ReadLine());
 			cmShowControls.Checked = bool.Parse(sr.ReadLine());
@@ -67,6 +70,7 @@ namespace Clock
 			cmShowConsole.Checked = bool.Parse(sr.ReadLine());
 			labelTime.BackColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
 			labelTime.ForeColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
+			cmLoadOnWinStartup.Checked = bool.Parse(sr.ReadLine());
 			string font_name = sr.ReadLine();
 			int font_size = Convert.ToInt32(sr.ReadLine());
 			sr.Close();
@@ -184,5 +188,16 @@ namespace Clock
 		public static extern bool AllocConsole();
 		[DllImport("kernel32.dll")]
 		public static extern bool FreeConsole();
+
+		private void cmLoadOnWinStartup_CheckedChanged(object sender, EventArgs e)
+		{
+			string key_name = "ClockPV_319";
+			RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+			if (cmLoadOnWinStartup.Checked)
+				rk.SetValue(key_name, Application.ExecutablePath);
+			else 
+				rk.DeleteValue(key_name, false);
+		}
+		
 	}
 }
