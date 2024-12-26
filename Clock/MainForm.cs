@@ -19,6 +19,7 @@ namespace Clock
 	public partial class MainForm : Form
 	{
 		ChooseFontForm fontDialog = null;
+		AlarmsForm alarms = null;
 		public MainForm()
 		{
 			InitializeComponent();
@@ -30,7 +31,9 @@ namespace Clock
 
 			cmShowConsole.Checked = true;
 			LoadSettings();
+			alarms = new AlarmsForm();
 		}
+
 		void SetVisibility(bool visible)
 		{
 			cbShowDate.Visible = visible;
@@ -41,7 +44,7 @@ namespace Clock
 			this.ShowInTaskbar = visible;
 		}
 
-		void SetSettings()
+		void SaveSettings()
 		{
 			StreamWriter sw = new StreamWriter("Settings.ini");
 			sw.WriteLine($"{cmTopmost.Checked}");
@@ -55,7 +58,7 @@ namespace Clock
 			sw.WriteLine($"{fontDialog.Filename}");
 			sw.WriteLine($"{labelTime.Font.Size}");
 			sw.Close();
-			Process.Start("notepad", "Settings.ini");
+			//Process.Start("notepad", "Settings.ini");
 		}
 
 		void LoadSettings()
@@ -72,7 +75,7 @@ namespace Clock
 			labelTime.ForeColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
 			cmLoadOnWinStartup.Checked = bool.Parse(sr.ReadLine());
 			string font_name = sr.ReadLine();
-			int font_size = Convert.ToInt32(sr.ReadLine());
+			int font_size = (int)Convert.ToDouble(sr.ReadLine());
 			sr.Close();
 			fontDialog = new ChooseFontForm(this, font_name, font_size);
 			labelTime.Font = fontDialog.Font;
@@ -110,7 +113,6 @@ namespace Clock
 
 		private void cmExit_Click(object sender, EventArgs e)
 		{
-			SetSettings();
 			this.Close();
 		}
 
@@ -197,7 +199,18 @@ namespace Clock
 				rk.SetValue(key_name, Application.ExecutablePath);
 			else 
 				rk.DeleteValue(key_name, false);
+			rk.Dispose();
 		}
-		
+
+		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			SaveSettings();
+		}
+
+		private void cmAlarms_Click(object sender, EventArgs e)
+		{
+			alarms.Location = new Point(this.Location.X - alarms.Width, this.Location.Y);
+			alarms.ShowDialog();
+		}
 	}
 }

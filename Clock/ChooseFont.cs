@@ -14,11 +14,12 @@ namespace Clock
 {
 	public partial class ChooseFontForm : Form
 	{
-		public Font Font { get; set; }
+		public override Font Font { get; set; }
 		public string Filename { get; set; }
 		public ChooseFontForm()
 		{
 			InitializeComponent();
+
 			LoadFonts();
 			cbFonts.SelectedIndex = 0;
 		}
@@ -26,11 +27,13 @@ namespace Clock
 		public ChooseFontForm(MainForm parent, string font_name, int font_size)
 		{
 			InitializeComponent();
+
 			this.Location = new Point
 				(
 					Screen.PrimaryScreen.Bounds.Width - parent.Width - this.Width,
 					parent.Location.Y*2
 				);
+
 			Filename = font_name;
 			nudFontSize.Value = font_size;
 			LoadFonts();
