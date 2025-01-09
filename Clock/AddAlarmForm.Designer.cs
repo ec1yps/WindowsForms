@@ -36,6 +36,8 @@
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnFile = new System.Windows.Forms.Button();
 			this.clbWeekDays = new System.Windows.Forms.CheckedListBox();
+			this.rtbMessage = new System.Windows.Forms.RichTextBox();
+			this.lblMessage = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// cbUseDate
@@ -75,7 +77,7 @@
 			// lblAlarmFile
 			// 
 			this.lblAlarmFile.AutoSize = true;
-			this.lblAlarmFile.Location = new System.Drawing.Point(13, 85);
+			this.lblAlarmFile.Location = new System.Drawing.Point(9, 208);
 			this.lblAlarmFile.Name = "lblAlarmFile";
 			this.lblAlarmFile.Size = new System.Drawing.Size(26, 13);
 			this.lblAlarmFile.TabIndex = 3;
@@ -84,7 +86,7 @@
 			// btnOK
 			// 
 			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.btnOK.Location = new System.Drawing.Point(204, 153);
+			this.btnOK.Location = new System.Drawing.Point(204, 237);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(75, 23);
 			this.btnOK.TabIndex = 4;
@@ -95,7 +97,7 @@
 			// btnCancel
 			// 
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.Location = new System.Drawing.Point(286, 153);
+			this.btnCancel.Location = new System.Drawing.Point(286, 237);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
 			this.btnCancel.TabIndex = 5;
@@ -104,12 +106,13 @@
 			// 
 			// btnFile
 			// 
-			this.btnFile.Location = new System.Drawing.Point(12, 153);
+			this.btnFile.Location = new System.Drawing.Point(12, 237);
 			this.btnFile.Name = "btnFile";
 			this.btnFile.Size = new System.Drawing.Size(75, 23);
 			this.btnFile.TabIndex = 6;
 			this.btnFile.Text = "Choose file";
 			this.btnFile.UseVisualStyleBackColor = true;
+			this.btnFile.Click += new System.EventHandler(this.btnFile_Click);
 			// 
 			// clbWeekDays
 			// 
@@ -130,11 +133,31 @@
 			this.clbWeekDays.Size = new System.Drawing.Size(349, 19);
 			this.clbWeekDays.TabIndex = 7;
 			// 
+			// rtbMessage
+			// 
+			this.rtbMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.rtbMessage.Location = new System.Drawing.Point(12, 150);
+			this.rtbMessage.Name = "rtbMessage";
+			this.rtbMessage.Size = new System.Drawing.Size(349, 46);
+			this.rtbMessage.TabIndex = 8;
+			this.rtbMessage.Text = "";
+			// 
+			// lblMessage
+			// 
+			this.lblMessage.AutoSize = true;
+			this.lblMessage.Location = new System.Drawing.Point(9, 134);
+			this.lblMessage.Name = "lblMessage";
+			this.lblMessage.Size = new System.Drawing.Size(112, 13);
+			this.lblMessage.TabIndex = 9;
+			this.lblMessage.Text = "Введите сообщение:";
+			// 
 			// AddAlarmForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(369, 185);
+			this.ClientSize = new System.Drawing.Size(369, 272);
+			this.Controls.Add(this.lblMessage);
+			this.Controls.Add(this.rtbMessage);
 			this.Controls.Add(this.clbWeekDays);
 			this.Controls.Add(this.btnFile);
 			this.Controls.Add(this.btnCancel);
@@ -161,5 +184,7 @@
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.Button btnFile;
 		private System.Windows.Forms.CheckedListBox clbWeekDays;
+		private System.Windows.Forms.RichTextBox rtbMessage;
+		private System.Windows.Forms.Label lblMessage;
 	}
 }
