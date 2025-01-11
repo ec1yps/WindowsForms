@@ -31,12 +31,24 @@ namespace Clock
 			}
 		}
 
+		public bool[] ExtractWeekDays()
+		{
+			bool[] weekDays = new bool[7];
+
+			for (byte i = 0; i < 7; i++)
+			{
+				weekDays[i] = (week & (byte)(1 << i)) != 0;
+			}
+
+			return weekDays;
+		}
+
 		public override string ToString()
 		{
 			string weekdays = "";
 			for (byte i = 0; i < Weekdays.Length; i++)
 			{
-				if ((byte)((1 << i) & week) != (byte)0) 
+				if ((byte)((1 << i) & week) != (byte)0)
 					weekdays += $"{Weekdays[i]},";
 			}
 			return weekdays;

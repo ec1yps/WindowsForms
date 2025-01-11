@@ -29,6 +29,14 @@ namespace Clock
 			dtpDate.Enabled = cbUseDate.Checked;
 		}
 
+		void SetWeekDays(bool[] week)
+		{
+			for (int i = 0; i < clbWeekDays.Items.Count; i++)
+			{
+				clbWeekDays.SetItemChecked(i, week[i]);
+			}
+		}
+
 		private void btnOK_Click(object sender, EventArgs e)
 		{
 			Week week = new Week(clbWeekDays.Items.Cast<object>().Select((item, index) => clbWeekDays.GetItemChecked(index)).ToArray());
@@ -48,7 +56,7 @@ namespace Clock
 			Alarm.Filename = lblAlarmFile.Text;
 			Alarm.Message = rtbMessage.Text;
 
-			if (Alarm.Filename == "File:")
+			if (Alarm.Filename == "" || Alarm.Filename == "File:")
 			{
 				this.DialogResult = DialogResult.None;
 				MessageBox.Show(this, "Выберите звуковой файл!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -61,6 +69,19 @@ namespace Clock
 			{
 				lblAlarmFile.Text = open.FileName;
 			}
+		}
+
+		private void AddAlarmForm_Load(object sender, EventArgs e)
+		{
+			if (Alarm.Date != DateTime.MinValue)
+			{
+				cbUseDate.Checked = true;
+				dtpDate.Value = Alarm.Date;
+			}
+			dtpTime.Value = DateTime.Now.Date + Alarm.Time;
+			SetWeekDays(Alarm.Weekdays.ExtractWeekDays());
+			lblAlarmFile.Text = Alarm.Filename;
+			rtbMessage.Text = Alarm.Message;
 		}
 	}
 }
