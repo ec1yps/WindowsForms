@@ -20,6 +20,7 @@ namespace Clock
 	{
 		ChooseFontForm fontDialog = null;
 		AlarmsForm alarms = null;
+		Alarm nextAlarm = null;
 		public MainForm()
 		{
 			InitializeComponent();
@@ -99,6 +100,11 @@ namespace Clock
 				labelTime.Text += DateTime.Now.DayOfWeek;
 			}
 			notifyIcon.Text = labelTime.Text;
+
+			if (alarms.LB_Alarms.Items.Count > 0)
+				nextAlarm = alarms.LB_Alarms.Items.Cast<Alarm>().ToArray().Min();
+			if (nextAlarm != null)
+				Console.WriteLine(nextAlarm);
 		}
 
 		private void btnHideControls_Click(object sender, EventArgs e)
@@ -197,7 +203,7 @@ namespace Clock
 			RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 			if (cmLoadOnWinStartup.Checked)
 				rk.SetValue(key_name, Application.ExecutablePath);
-			else 
+			else
 				rk.DeleteValue(key_name, false);
 			rk.Dispose();
 		}

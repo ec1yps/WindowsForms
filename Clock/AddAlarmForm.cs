@@ -31,9 +31,9 @@ namespace Clock
 
 		private void btnOK_Click(object sender, EventArgs e)
 		{
-			Week week = new Week(clbWeekDays.Items.Cast<object>().Select((item,index)=>clbWeekDays.GetItemChecked(index)).ToArray());
-            Console.WriteLine(week);
-			Alarm.Date = dtpDate.Enabled? dtpDate.Value : DateTime.MinValue;
+			Week week = new Week(clbWeekDays.Items.Cast<object>().Select((item, index) => clbWeekDays.GetItemChecked(index)).ToArray());
+			Console.WriteLine(week);
+			Alarm.Date = dtpDate.Enabled ? dtpDate.Value : DateTime.MinValue;
 			Alarm.Time = dtpTime.Value.TimeOfDay;
 			Alarm.Weekdays = week;
 			Alarm.Filename = lblAlarmFile.Text;
@@ -43,11 +43,11 @@ namespace Clock
 				this.DialogResult = DialogResult.None;
 				MessageBox.Show(this, "Выберите звуковой файл!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			}
-        }
+		}
 
 		private void btnFile_Click(object sender, EventArgs e)
 		{
-			if(open.ShowDialog() == DialogResult.OK)
+			if (open.ShowDialog() == DialogResult.OK)
 			{
 				lblAlarmFile.Text = open.FileName;
 			}
