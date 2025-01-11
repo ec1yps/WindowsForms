@@ -33,11 +33,21 @@ namespace Clock
 		{
 			Week week = new Week(clbWeekDays.Items.Cast<object>().Select((item, index) => clbWeekDays.GetItemChecked(index)).ToArray());
 			Console.WriteLine(week);
+
+			/*Alarm = new Alarm
+			{
+				Date = dtpDate.Enabled ? dtpDate.Value : DateTime.MinValue,
+				Time = dtpTime.Value.TimeOfDay,
+				Weekdays = week,
+				Filename = lblAlarmFile.Text,
+				Message = rtbMessage.Text
+			};*/
 			Alarm.Date = dtpDate.Enabled ? dtpDate.Value : DateTime.MinValue;
 			Alarm.Time = dtpTime.Value.TimeOfDay;
 			Alarm.Weekdays = week;
 			Alarm.Filename = lblAlarmFile.Text;
 			Alarm.Message = rtbMessage.Text;
+
 			if (Alarm.Filename == "File:")
 			{
 				this.DialogResult = DialogResult.None;
