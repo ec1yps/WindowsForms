@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using Microsoft.Win32;
+using System.Media;
 
 namespace Clock
 {
@@ -110,7 +111,9 @@ namespace Clock
 			if (alarms.LB_Alarms.Items.Count > 0)
 				nextAlarm = FindNextAlarm(); //nextAlarm = alarms.LB_Alarms.Items.Cast<Alarm>().ToArray().Min();
 			if (nextAlarm != null)
+			{
 				Console.WriteLine(nextAlarm);
+			}
 		}
 
 		private void btnHideControls_Click(object sender, EventArgs e)
