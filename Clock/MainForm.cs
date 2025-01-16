@@ -114,6 +114,11 @@ namespace Clock
 			axWindowsMediaPlayer.Visible = true;
 			axWindowsMediaPlayer.Ctlcontrols.play();
 		}
+		private void SetPlayerInvisible(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
+		{
+			if (axWindowsMediaPlayer.playState == WMPLib.WMPPlayState.wmppsMediaEnded || axWindowsMediaPlayer.playState == WMPLib.WMPPlayState.wmppsStopped)
+				axWindowsMediaPlayer.Visible = false;
+		}
 
 		private void timer_Tick(object sender, EventArgs e)
 		{
@@ -269,5 +274,6 @@ namespace Clock
 			alarms.Location = new Point(this.Location.X - alarms.Width, this.Location.Y);
 			alarms.ShowDialog();
 		}
+
 	}
 }
