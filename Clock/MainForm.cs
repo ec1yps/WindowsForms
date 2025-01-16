@@ -13,7 +13,6 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using Microsoft.Win32;
-using System.Media;
 
 namespace Clock
 {
@@ -34,6 +33,7 @@ namespace Clock
 			cmShowConsole.Checked = true;
 			LoadSettings();
 			alarms = new AlarmsForm();
+			axWindowsMediaPlayer.Visible = false;
 		}
 
 		void SetVisibility(bool visible)
@@ -83,10 +83,31 @@ namespace Clock
 			labelTime.Font = fontDialog.Font;
 		}
 
+		void SaveAlarms()
+		{
+			Directory.SetCurrentDirectory(Path.GetDirectoryName(Application.ExecutablePath));
+			StreamWriter sw = new StreamWriter("Alarms.ini");
+			for (int i = 0; i < alarms.LB_Alarms.Items.Count; i++)
+			{
+				sw.WriteLine(alarms.LB_Alarms.Items[i].ToString());
+			}
+			sw.Close();
+		}
+
 		Alarm FindNextAlarm()
 		{
-			Alarm[] actualAlarms = alarms.LB_Alarms.Items.Cast<Alarm>().Where(a => a.Time > DateTime.Now.TimeOfDay).ToArray();
+			Alarm[] actualAlarms = null;
+			actualAlarms = alarms.LB_Alarms.Items.Cast<Alarm>().Where(a => a.Time > DateTime.Now.TimeOfDay).ToArray();
+
 			return actualAlarms.Min();
+		}
+		
+		void PlayAlarm()
+		{
+			axWindowsMediaPlayer.URL = nextAlarm.Filename;
+			axWindowsMediaPlayer.settings.volume = 100;
+			axWindowsMediaPlayer.Visible = true;
+			axWindowsMediaPlayer.Ctlcontrols.play();
 		}
 
 		private void timer_Tick(object sender, EventArgs e)
@@ -111,13 +132,14 @@ namespace Clock
 			if (nextAlarm != null && nextAlarm.Time.Hours == DateTime.Now.Hour && nextAlarm.Time.Minutes == DateTime.Now.Minute && nextAlarm.Time.Seconds == DateTime.Now.Second)
 			{
 				System.Threading.Thread.Sleep(1000);
-				MessageBox.Show(this, nextAlarm.ToString(), "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				PlayAlarm();
+				if (nextAlarm.Message != "") MessageBox.Show(this, nextAlarm.Message, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				nextAlarm = null;
 			}
 
-			if (DateTime.Now.Second % 10 == 0 && alarms.LB_Alarms.Items.Count > 0)
-				nextAlarm = FindNextAlarm(); //nextAlarm = alarms.LB_Alarms.Items.Cast<Alarm>().ToArray().Min();
-			if (nextAlarm != null)
+			if (alarms.LB_Alarms.Items.Count > 0)
+				nextAlarm = FindNextAlarm();
+			if (DateTime.Now.Second % 10 == 0 && nextAlarm != null)
 			{
 				Console.WriteLine(nextAlarm);
 			}
@@ -227,6 +249,7 @@ namespace Clock
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			SaveSettings();
+			SaveAlarms();
 		}
 
 		private void cmAlarms_Click(object sender, EventArgs e)

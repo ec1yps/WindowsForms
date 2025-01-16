@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,20 @@ namespace Clock
 			InitializeComponent();
 			addAlarm = new AddAlarmForm();
 			openFile = new OpenFileDialog();
+			//LoadAlarms();
+		}
+
+		void LoadAlarms()
+		{
+			Directory.SetCurrentDirectory(Path.GetDirectoryName(Application.ExecutablePath));
+			StreamReader sr = new StreamReader("Alarms.ini");
+
+			while (!sr.EndOfStream)
+			{
+				lbAlarms.Items.Add(sr.ReadLine());
+			}
+
+			sr.Close();
 		}
 
 		private void btnAdd_Click(object sender, EventArgs e)
