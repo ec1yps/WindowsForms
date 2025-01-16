@@ -49,13 +49,27 @@ namespace Clock
 			return info;
 		}
 
+		/*public static bool operator ==(Alarm left, Alarm right)
+		{
+			return
+				left.Date == right.Date &&
+				left.Time == right.Time &&
+				left.Weekdays == right.Weekdays &&
+				left.Filename == right.Filename &&
+				left.Message == right.Message;
+		}
+		public static bool operator !=(Alarm left, Alarm right)
+		{
+			return !(left == right);
+		}*/
+
 		/*public static bool operator >(Alarm left, Alarm right)
 		{
 			if (left.Date != DateTime.MinValue || right.Date != DateTime.MinValue)
 			{
-				return 
+				return
 					(left.Date == DateTime.MinValue ? DateTime.Today : left.Date) >=
-					(right.Date == DateTime.MinValue ? DateTime.Today : right.Date) && 
+					(right.Date == DateTime.MinValue ? DateTime.Today : right.Date) &&
 					left.Time > right.Time;
 			}
 			else return left.Time > right.Time;
@@ -64,7 +78,7 @@ namespace Clock
 		{
 			if (left.Date != DateTime.MinValue || right.Date != DateTime.MinValue)
 			{
-				return 
+				return
 					(left.Date == DateTime.MinValue ? DateTime.Today : left.Date) <=
 					(right.Date == DateTime.MinValue ? DateTime.Today : right.Date) &&
 					left.Time < right.Time;
@@ -74,7 +88,7 @@ namespace Clock
 
 		public int CompareTo(Alarm other)
 		{
-			Console.WriteLine("Alarm comparison");
+			//Console.WriteLine("Alarm comparison");
 			return this.Time.CompareTo(other.Time);
 		}
 	}
